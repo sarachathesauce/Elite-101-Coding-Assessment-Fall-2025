@@ -4,6 +4,13 @@ from datetime import datetime, timedelta
 # -------- Level 1 --------
 # TODO: Create a function to view all books that are currently available
 # Output should include book ID, title, and author
+def view_all_available_books():
+    print("\nAvailable Books:") # i added a newline header for better looks
+    for book in library_books: #searches each entry of library books for a book
+        if book["available"]: # checks if the book is available by looking at value of "available" t/f
+            print(f'{book["id"]}: "{book["title"]}" by {book["author"]}') #f string prints the id value, title value, and author value
+#test!           
+view_all_available_books()         
 
 
 # -------- Level 2 --------
