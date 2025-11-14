@@ -101,6 +101,51 @@ def view_overdue_books():
 
 # -------- Level 5 --------
 # TODO: Convert your data into a Book class with methods like checkout() and return_book()
+class Book:
+    def __init__(self, id, title, author, genre, available, due_date, checkouts):
+        # init means the program runs once when a book is added
+        self.id = id
+        self.title = title
+        self.author = author
+        self.genre = genre
+        self.available = available
+        self.due_date = due_date
+        self.checkouts = checkouts
+        # self stores the title, id ect in that specific book, each book has a different self.title
+
+    def checkout(self):
+        # this method belongs to the book object
+        if not self.available:
+            print(f'"{self.title}" is not available right now.')
+            return
+        
+        # if book IS available:
+        self.available = False
+        self.due_date = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%d")
+        self.checkouts += 1
+        print(f'You checked out "{self.title}"! It\'s due on {self.due_date}.')
+
+    def return_book(self):
+        # if the book is available and you choose a book it'll show u its not checked out
+        if self.available:
+            print(f'"{self.title}" was not checked out.')
+            return
+        
+        # marks the book as returned by changing availability and resetting due dates
+        self.available = True
+        self.due_date = None
+        print(f'You returned "{self.title}". Thanks!')
+
+    def display(self):
+        # if the book's available then 
+        if self.available:
+            status = "Available"
+        else:
+            status = "Checked out! Your book is due on:" + str(self.due_date)
+        print(f'[{self.id}] "{self.title}" by {self.author} is {status}')
+              
+    
+
 
 # TODO: Add a simple menu that allows the user to choose different options like view, search, checkout, return, etc.
 def menu():
